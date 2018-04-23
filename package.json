@@ -1,0 +1,17 @@
+{
+  "name": "react-simple-achieve",
+  "version": "1.0.0",
+  "description": "react simple achieve",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./index.html"
+  },
+  "author": "Simon",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1"
+  }
+}
