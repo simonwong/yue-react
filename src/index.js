@@ -50,13 +50,21 @@ import ReactDOM from './ReactDOM'
 //     document.getElementById('root')
 // )
 
-function tick () {
-    const time = new Date().toLocaleTimeString()
-    const clockElement = <h1>{time}</h1>
+class TheTime extends React.Component {
+    constructor (props) {
+        super(props)
 
-    ReactDOM.render(clockElement, document.getElementById('root'))
+        this.state = {
+            count: 0,
+        }
+    }
+
+    render () {
+        const { count } = this.state
+        return (
+            <h1>{ count }</h1>
+        )
+    }
 }
 
-tick()
-
-setInterval(tick, 1000)
+ReactDOM.render(<TheTime />, document.getElementById('root'))

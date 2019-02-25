@@ -1,4 +1,4 @@
-// import Component from './component'
+import Component from './component'
 
 const TEXT_ELEMENT = 'TEXT ELEMENT'
 
@@ -22,7 +22,7 @@ function createTextElement (value) {
 
 const React = {
     createElement,
-    // Component
+    Component,
 }
 
 export default React
