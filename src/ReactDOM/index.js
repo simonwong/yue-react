@@ -81,7 +81,7 @@ function reconcileChildren (instance, element) {
 }
 
 /**
- * 创建公共实例
+ * 创建组件的公共实例
  * @param {*} element 
  * @param {*} internalInstance 
  */
@@ -149,9 +149,9 @@ function instantiate (element) {
         // 3. publicInstance = newApp
         const  publicInstance = createPublicInstance(element, instance)
 
-        const childElement = publicInstance.render()
+        const childElement = publicInstance.render() // 这里render return了，所以要执行render函数才能拿到
 
-        const childInstance = instantiate(childElement)
+        const childInstance = instantiate(childElement) // 生成实例
         const dom = childInstance.dom
         // 组件元素比普通元素多了一个自身的实例
         // 组件内部只能有一个子节点，所以是`childInstance`，而不是`childInstances`
