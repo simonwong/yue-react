@@ -1,14 +1,6 @@
-# react@15 简易实现 #
+# Yueact 
 
-> 所写的方法都为简易的实现方法
+Base react@16.8 without all the optimizations and non-essential features
 
-
-使用
-
-> 使用parcel工具，注意babelrc的配置
-
-```
-npm install parcel -g
-npm install
-npm start
-```
+## Legacy
+react@15 version 👀 [tag: v1.0.0](https://github.com/simonwong/yue-react/tree/v1.0.0)
