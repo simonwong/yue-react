@@ -1,70 +1,26 @@
-import React from './React'
-import ReactDOM from './ReactDOM'
+import Yueact from './Yueact'
 
-// class Welcome extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             count: 0
-//         }
+/** @jsx Yueact.createElement */
+const element = <h1 title="foo">Hello</h1>
 
-//         this.handleAddCount = this.handleAddCount.bind(this)
-//     }
-//     componentWillMount () {
-//         console.log('WillMount')
-//     }
-//     componentWillReceiveProps () {
-//         console.log('WillReceiveProps')
-//     }
-//     componentWillUpdate () {
-//         console.log('WillUpdate')
-//     }
-//     componentDidUpdate () {
-//         console.log('DidUpdate')
-//     }
-//     componentDidMount () {
-//         console.log('DidMount')
-//     }
-    
-//     handleAddCount () {
-//         this.setState({
-//             count: this.state.count + 1
-//         })
-//     }
-
-//     render () {
-//         return (
-//             <div>
-//                 <h1>Hello, { this.props.name }</h1>
-//                 <h3>当前数值 <span style={{color: 'red'}}>{ this.state.count }</span></h3>
-//                 <button onClick={this.handleAddCount}>Add</button>
-//             </div>
-//         )
-//     }
+// // step 0.1
+// const element = {
+//   type: "h1",
+//   props: {
+//     title: "foo",
+//     children: "Hello", // string or array
+//   },
 // }
 
-// const element = <Welcome name="World" />
+const container = document.getElementById('root')
+Yueact.render(element, container)
 
-// ReactDOM.render(
-//     element,
-//     document.getElementById('root')
-// )
+// // step 0.2
+// const node = document.createElement(element.type)
+// node['title'] = element.props.title
 
-class TheTime extends React.Component {
-    constructor (props) {
-        super(props)
+// const text = document.createTextNode('')
+// text['nodeValue'] = element.props.children
 
-        this.state = {
-            count: 0,
-        }
-    }
-
-    render () {
-        const { count } = this.state
-        return (
-            <h1>{ count }</h1>
-        )
-    }
-}
-
-ReactDOM.render(<TheTime />, document.getElementById('root'))
+// node.appendChild(text)
+// container.appendChild(node)
