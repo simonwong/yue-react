@@ -1,28 +1,35 @@
-import Component from './component'
-
-const TEXT_ELEMENT = 'TEXT ELEMENT'
-
-function createElement (type, config, ...args) {
-    const props = Object.assign({}, config)
-    const hasChildren = args.length > 0
-    const rawChildren = hasChildren ? [].concat(...args) : []
-
-    // 过滤空值，将文本类型的转成规范数据格式
-    props.children = rawChildren
-        .filter(c => c != null && c !== false)
-        .map(c => c instanceof Object ? c : createTextElement(c))
-
-    return { type, props }
-}
-
-function createTextElement (value) {
-    // 规范数据格式
-    return createElement(TEXT_ELEMENT, { nodeValue: value })
-}
-
-const React = {
-    createElement,
+export {
+    // Children,
+    // createRef,
     Component,
-}
-
-export default React
+    // PureComponent,
+    // createContext,
+    // forwardRef,
+    // lazy,
+    // memo,
+    // useCallback,
+    // useContext,
+    // useEffect,
+    // useImperativeHandle,
+    // useDebugValue,
+    // useLayoutEffect,
+    // useMemo,
+    // useReducer,
+    // useRef,
+    // useState,
+    // Fragment,
+    // Profiler,
+    // StrictMode,
+    // Suspense,
+    // createElement,
+    // cloneElement,
+    // isValidElement,
+    // version,
+    // createFactory,
+    // useTransition,
+    // useDeferredValue,
+    // SuspenseList,
+    // block,
+    // jsx,
+  } from './src/React';
+  
