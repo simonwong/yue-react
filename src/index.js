@@ -1,7 +1,12 @@
 import Yueact from './Yueact'
 
 /** @jsx Yueact.createElement */
-const element = <h1 title="foo">Hello</h1>
+const element = (
+  <ul>
+    <li>Hello</li>
+    <li>SImon</li>
+  </ul>
+)
 
 // // step 0.1
 // const element = {
