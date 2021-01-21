@@ -29,9 +29,9 @@ render 函数通过虚拟 DOM 递归构建节点。
 递归的将所有 fiber 节点一次性 append 上去 【 引入 wip (work in process) 是为了避免 Fiber 局部 ui 渲染 】
 
 
-**step 3**
+**step 3: Reconciliation**
 
-...
+根据 alternate （上一次更新后的 fiber）和 wipFiber （当前新的 fiber）做对比，在 commitWork 中不同情况用不同的方式处理
 
 ## 参考
 
