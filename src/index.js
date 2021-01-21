@@ -16,7 +16,6 @@ const element = (
 //     children: "Hello", // string or array
 //   },
 // }
-
 const container = document.getElementById('root')
 Yueact.render(element, container)
 
