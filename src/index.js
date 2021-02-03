@@ -1,30 +1,12 @@
 import Yueact from './Yueact'
 
 /** @jsx Yueact.createElement */
-const element = (
-  <ul>
-    <li>Hello</li>
-    <li>SImon</li>
-  </ul>
-)
+function App (props) {
+  return <h1>Hi, {props.name}</h1>
+}
 
-// // step 0.1
-// const element = {
-//   type: "h1",
-//   props: {
-//     title: "foo",
-//     children: "Hello", // string or array
-//   },
-// }
+/** @jsx Yueact.createElement */
+const element = <App name="YUEQiNG" />
+
 const container = document.getElementById('root')
 Yueact.render(element, container)
-
-// // step 0.2
-// const node = document.createElement(element.type)
-// node['title'] = element.props.title
-
-// const text = document.createTextNode('')
-// text['nodeValue'] = element.props.children
-
-// node.appendChild(text)
-// container.appendChild(node)

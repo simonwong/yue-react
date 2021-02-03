@@ -12,12 +12,28 @@ let currentRoot = null
 let deletions = null
 
 
+function commitDeletion (fiber, domParent) {
+  if (fiber.dom) {
+    domParent.removeChild(fiber.dom)
+  } else {
+    commitDeletion(fiber.child, domParent)
+  }
+}
+
 // 递归的处理节点，append ，update 或者 remove
 export function commitWork (fiber) {
   if (!fiber) {
     return
   }
-  const domParent = fiber.parent.dom
+
+  let domParentFiber = fiber.parent
+
+  // 寻找具有 DOM 节点的父节点
+  while (!domParentFiber.dom) {
+    domParentFiber = domParentFiber.parent
+  }
+
+  const domParent = domParentFiber.dom
 
   if (
     fiber.effectTag === "PLACEMENT" &&
@@ -34,7 +50,7 @@ export function commitWork (fiber) {
       fiber.props
     )
   } else if (fiber.effectTag === "DELETION") {
-    domParent.removeChild(fiber.dom)
+    commitDeletion(fiber, domParent)
   }
   commitWork(fiber.child)
   commitWork(fiber.sibling)
@@ -49,6 +65,11 @@ export function commitRoot () {
   wipRoot = null
 }
 
+/**
+ * 调度
+ * @param {*} wipFiber
+ * @param {*} elements
+ */
 export function reconcileChildren (wipFiber, elements) {
   let index = 0
   let oldFiber = wipFiber.alternate && wipFiber.alternate.child
@@ -115,9 +136,22 @@ export function reconcileChildren (wipFiber, elements) {
   }
 }
 
+/**
+ * 更新函数组件
+ * @param {*} fiber
+ */
+function updateFunctionComponent(fiber) {
+  const children = [fiber.type(fiber.props)]
 
-// 执行单元工作，并且返回下一个工作单元
-export function performUnitOfWork (fiber) {
+  reconcileChildren(fiber, children)
+}
+
+
+/**
+ * 更新类组件
+ * @param {*} fiber
+ */
+function updateHostComponent(fiber) {
   /**
    * step1: 为当前工作单元创建真实 DOM 节点
    */
@@ -134,6 +168,20 @@ export function performUnitOfWork (fiber) {
    */
   const elements = fiber.props.children
   reconcileChildren(fiber, elements)
+}
+
+/**
+ * 执行单元工作，并且返回下一个工作单元
+ * @param {*} fiber
+ */
+export function performUnitOfWork (fiber) {
+  const isFunctionComponent = fiber.type instanceof Function
+
+  if (isFunctionComponent) {
+    updateFunctionComponent(fiber)
+  } else {
+    updateHostComponent(fiber)
+  }
 
   /**
    * step3: 返回下一个工作单元 fiber
@@ -157,6 +205,11 @@ export function performUnitOfWork (fiber) {
   return nextFiber
 }
 
+/**
+ * 创建 fiber 根节点
+ * @param {*} element
+ * @param {*} container
+ */
 export function createFiberRoot (element, container) {
   // 设置 fiber root
   wipRoot = {
@@ -170,6 +223,10 @@ export function createFiberRoot (element, container) {
   nextUnitOfWork = wipRoot
 }
 
+/**
+ * WorkLoop
+ * @param {*} deadline
+ */
 export function workLoop (deadline) {
   let shouldYield = false
 

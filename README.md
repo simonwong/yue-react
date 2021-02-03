@@ -1,7 +1,6 @@
 # Yueact 
 
 Base react@16.8 without all the optimizations and non-essential features
-
 ## 思考与理解
 
 ### render 过程
@@ -32,6 +31,15 @@ render 函数通过虚拟 DOM 递归构建节点。
 **step 3: Reconciliation**
 
 根据 alternate （上一次更新后的 fiber）和 wipFiber （当前新的 fiber）做对比，在 commitWork 中不同情况用不同的方式处理
+
+
+### Function Components
+
+函数组件有两处不同
+- 函数组件的 fiber 没有 DOM 节点
+- children 来自运行函数，而不是直接从 props 拿
+
+函数组件的 `fiber.type` 会是自身的 Function，执行就能拿到 children
 
 ## 参考
 
