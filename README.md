@@ -1,6 +1,15 @@
 # Yueact 
 
 Base react@16.8 without all the optimizations and non-essential features
+
+## diff
+
+- Yueact 会在渲染阶段遍历整棵树；相反，React会遵循一些提示和启发式方法跳过整个子树，在子树中没有任何变化。
+- Yueact 在 commit 阶段遍历整棵树；React 会保存一个只包含有影响的 fiber，并且只访问这些 fiber
+- Yueact 每次构建 WIP tree 会为 fiber 创建新的对象； React 会重复利用先前的树
+- Yueact 在渲染阶段收到新的更新时，会丢弃 WIP tree ，从根节点重新开始；React 会用过期时间戳标记，并比价优先级来更新
+- ...
+
 ## 思考与理解
 
 ### render 过程
