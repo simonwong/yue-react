@@ -15,12 +15,7 @@ export function createDom (fiber) {
     ? document.createTextNode('') // 使用 textNode 而不是 innerText 允许我们以相同的方式处理
     : document.createElement(fiber.type)
 
-  // 处理参数
-  Object.keys(fiber.props)
-    .filter(isProperty)
-    .forEach(name => {
-      dom[name] = fiber.props[name]
-    })
+  updateDom(dom, {}, fiber.props)
 
   return dom
 }

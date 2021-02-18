@@ -41,6 +41,12 @@ render 函数通过虚拟 DOM 递归构建节点。
 
 函数组件的 `fiber.type` 会是自身的 Function，执行就能拿到 children
 
+### Hooks
+
+**useState**
+
+在 `fiber` 节点上增加了 `hooks` , `hook` 对象上拥有 `state` 和 `queue` 属性，`queue` 队列上放着 `actions`，并在下一次渲染时，one by one 的更新 `state` （相当于做了合并更新）。执行 `setState` 时会更新 `wipRoot` `nextUnitOfWork` 等东西来进行新一次的渲染。
+
 ## 参考
 
 - [build-your-own-react - Pombo](https://pomb.us/build-your-own-react/)
